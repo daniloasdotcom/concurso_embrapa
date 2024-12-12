@@ -8,6 +8,12 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Adicionar logo na barra lateral
+st.sidebar.image(
+    "images/logo_embrapa.jpg",  # Substitua pelo caminho correto da imagem
+    use_column_width=True
+)
+
 st.markdown(
     """
     <style>
@@ -91,17 +97,6 @@ st.markdown(
     <a href="https://www.instagram.com/questoesagro/" target="_blank">
         <i class="fab fa-instagram"></i> @questoesagro
     </a>
-    """,
-    unsafe_allow_html=True
-)
-
-# Adicionar rodapé com ícones de redes sociais
-st.markdown(
-    """
-    <div class="footer">
-        <p>Uma iniciativa Questões Agro</p>
-        <a href="https://www.instagram.com/questoesagro/" target="_blank"><i class="fab fa-instagram"></i></a>
-    </div>
     """,
     unsafe_allow_html=True
 )

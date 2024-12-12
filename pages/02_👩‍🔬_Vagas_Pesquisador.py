@@ -15,19 +15,18 @@ st.sidebar.image(
 
 # Carregar o dataset
 def load_data():
-    file_path = '../concurso_embrapa/EMBRAPA_Job_Details_Extended.xlsx'  # Substitua pelo caminho correto
+    file_path = '../concurso_embrapa/pesquisador.xlsx'  # Substitua pelo caminho correto
     data = pd.read_excel(file_path)
     return data
 
 data = load_data()
 
-# Dicionário de coordenadas das localidades
 localidades_coordenadas = {
     "EMBRAPA SEMIÁRIDO – Petrolina/PE": (-9.3833, -40.5014),
     "EMBRAPA AMAZÔNIA OCIDENTAL – Manaus/AM": (-3.1190, -60.0217),
     "EMBRAPA COCAIS – São Luís/MA": (-2.5364, -44.3056),
     "EMBRAPA RORAIMA – Boa Vista/RR": (2.8250, -60.6750),
-    "EMBRAPA CAPRINOS E OVINOS – Campina Grande": (-7.2172, -35.8811),
+    "EMBRAPA CAPRINOS E OVINOS – Campina Grande/PB": (-7.2172, -35.8811),
     "EMBRAPA CAPRINOS E OVINOS – Sobral/CE": (-3.6886, -40.3520),
     "EMBRAPA SUÍNOS E AVES – Concórdia/SC": (-27.2333, -51.9833),
     "EMBRAPA PECUÁRIA SUL – Bagé/RS": (-31.3289, -54.1019),
@@ -55,17 +54,37 @@ localidades_coordenadas = {
     "EMBRAPA SOJA – Londrina/PR": (-23.3045, -51.1696),
     "EMBRAPA AGROBIOLOGIA – Seropédica/RJ": (-22.7458, -43.7092),
     "EMBRAPA COCAIS – Balsas/MA": (-7.5333, -46.0417),
+    "EMBRAPA MEIO AMBIENTE – Balsas/MA": (-7.5333, -46.0417),
     "EMBRAPA MANDIOCA E FRUTICULTURA – Cruz das Almas/BA": (-12.6750, -39.1067),
     "EMBRAPA ALGODÃO – Sinop/MT": (-11.8639, -55.5167),
     "EMBRAPA RONDÔNIA – Vilhena/RO": (-12.7417, -60.1433),
     "EMBRAPA SOJA – Balsas/MA": (-7.5333, -46.0417),
-    "EMBRAPA MEIO-NORTE – Parnaíba/PI": (-2.9083, -41.7769)
+    "EMBRAPA MEIO-NORTE – Parnaíba/PI": (-2.9083, -41.7769),
+    "EMBRAPA CLIMA TEMPERADO – Pelotas/RS": (-31.7654, -52.3376),
+    "EMBRAPA FLORESTAS – Colombo/PR": (-25.2927, -49.2231),
+    "EMBRAPA UVA E VINHO – Bento Gonçalves/RS": (-29.1699, -51.5185),
+    "EMBRAPA ALGODÃO – Campina Grande/PB": (-7.2172, -35.8811),
+    "EMBRAPA ALGODÃO – Luís Eduardo Magalhães/BA": (-12.0967, -45.7869),
+    "EMBRAPA ALGODÃO – Irecê/BA": (-11.3033, -41.8553),
+    "EMBRAPA INSTRUMENTAÇÃO – São Carlos/SP": (-22.0064, -47.8972),
+    "EMBRAPA PECUÁRIA SUDESTE – São Carlos/SP": (-22.0064, -47.8972),
+    "EMBRAPA TERRITORIAL – Campinas/SP": (-22.9099, -47.0626),
+    "EMBRAPA ACRE – Cruzeiro do Sul/AC": (-7.6303, -72.6727),
+    "EMBRAPA CERRADOS – Planaltina/DF": (-15.6100, -47.6536),
+    "EMBRAPA AGROINDÚSTRIA TROPICAL – Fortaleza/CE": (-3.7172, -38.5433),
+    "EMBRAPA AGROENERGIA – Brasília/DF": (-15.7942, -47.8825),
+    "EMBRAPA AGRICULTURA DIGITAL – Campinas/SP": (-22.9099, -47.0626),
+    "EMBRAPA AGROINDÚSTRIA DE ALIMENTOS – Rio de Janeiro/RJ": (-22.9068, -43.1729),
+    "EMBRAPA SEDE – Brasília/DF": (-15.7942, -47.8825)
 }
+
+
 
 
 # Aplicação Streamlit
 def main():
-    st.title("Filtro por áreas e subáreas")
+    st.title("Vagas para Pesquisador 👩‍🔬")
+    st.subheader("Salário-base: R$ 12.814,61")
 
     # Filtro de áreas
     area_options = data['Área'].dropna().unique()

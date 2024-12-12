@@ -136,13 +136,3 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Adicionar rodapé com ícones de redes sociais
-st.markdown(
-    """
-    <div class="footer">
-        <p>Uma iniciativa Questões Agro</p>
-        <a href="https://www.instagram.com/questoesagro/" target="_blank"><i class="fab fa-instagram"></i></a>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
