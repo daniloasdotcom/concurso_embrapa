@@ -2,8 +2,9 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import folium_static
+from folium.plugins import LocateControl
 
-# Definir o nome da página
+# Configuração da página
 st.set_page_config(page_title="Vagas por Subárea", page_icon="📋")
 
 # Adicionar logo na barra lateral
@@ -12,9 +13,9 @@ st.sidebar.image(
     use_column_width=True
 )
 
-# Load the dataset
+# Carregar o dataset
 def load_data():
-    file_path = '../concurso_embrapa/EMBRAPA_Job_Details_Extended.xlsx'  # Replace with actual file path
+    file_path = '../concurso_embrapa/EMBRAPA_Job_Details_Extended.xlsx'  # Substitua pelo caminho correto
     data = pd.read_excel(file_path)
     return data
 
@@ -62,12 +63,11 @@ localidades_coordenadas = {
 }
 
 
-
-# Streamlit app
+# Aplicação Streamlit
 def main():
     st.title("Filtro por áreas e subáreas")
 
-    # Area filter on the main page
+    # Filtro de áreas
     area_options = data['Área'].dropna().unique()
     selected_area = st.selectbox("Selecione a Área", options=["Selecionar Área"] + list(area_options))
 
@@ -75,14 +75,14 @@ def main():
         st.write("Por favor, selecione uma Área para visualizar as Subáreas.")
         return
 
-    # Subarea buttons
+    # Botões de subárea
     subarea_options = data[data['Área'] == selected_area]['Subárea'].dropna().unique()
     st.write("**Subáreas Disponíveis:**")
     selected_subarea = None
 
-    cols = st.columns(4)  # Adjust the number of columns for layout
+    cols = st.columns(4)
     for i, subarea in enumerate(subarea_options):
-        col = cols[i % len(cols)]  # Cycle through columns
+        col = cols[i % len(cols)]
         if col.button(subarea):
             selected_subarea = subarea
 
@@ -90,11 +90,26 @@ def main():
         st.write("Por favor, clique em uma Subárea para visualizar as informações.")
         return
 
-    # Filter data based on selections
-    filtered_data = data.copy()
-    filtered_data = filtered_data[(filtered_data['Área'] == selected_area) & (filtered_data['Subárea'] == selected_subarea)]
+    # Filtro de dados baseado nas seleções
+    filtered_data = data[(data['Área'] == selected_area) & (data['Subárea'] == selected_subarea)]
 
-    # Display results
+    # Adicionar âncora HTML para a seção "Resultados Filtrados"
+    st.markdown(
+        """
+        <a id="resultados-filtrados"></a>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Script de rolagem automática
+    scroll_script = """
+    <script>
+        document.getElementById("resultados-filtrados").scrollIntoView({ behavior: 'smooth' });
+    </script>
+    """
+    st.markdown(scroll_script, unsafe_allow_html=True)
+
+    # Exibição dos resultados
     st.header("Resultados Filtrados")
     if filtered_data.empty:
         st.write("Nenhuma vaga encontrada para os filtros selecionados.")
@@ -107,7 +122,7 @@ def main():
 
         localidades_series = filtered_data['Localidade'].dropna().str.split(';')
         localidades = [loc.strip() for sublist in localidades_series for loc in sublist]
-        localidades = list(set(localidades))  # Remove duplicates
+        localidades = list(set(localidades))
 
         st.write("**LOCALIDADES:**")
         for localidade in localidades:
@@ -121,7 +136,7 @@ def main():
                 lat, lon = localidades_coordenadas[localidade]
                 folium.Marker([lat, lon], popup=localidade).add_to(m)
 
-        # Exibir o mapa no Streamlit
+
         folium_static(m)
 
         st.write("---")
@@ -131,6 +146,11 @@ def main():
             st.write(f"- PcD: {vaga['PcD']}")
             st.write(f"- PPP: {vaga['PPP']}")
             st.write(f"- Total de Vagas: {vaga['Total de Vagas']}")
+
+            # Verifica se há "*" em AC, PcD ou PPP e exibe a mensagem
+            if "*" in str(vaga['AC']) or "*" in str(vaga['PcD']) or "*" in str(vaga['PPP']):
+                st.write(
+                    "*Devido ao quantitativo total de vagas, não haverá reserva para provimento imediato, mantendo-se, portanto, o cadastro de reserva.")
             st.write("---")
 
         st.write("**REQUISITOS**")
@@ -144,21 +164,24 @@ def main():
                 st.write(f"- {graduacao.strip()}")
 
             st.write("---")
-            st.write("**DESCRIÇÃO ESPECÍFICA DAS ATIVIDADES DO CARGOS:**")
-            st.write(f"<p style='text-align: justify;'>{vaga['Descrição específica das atividade do cargo'].capitalize()}</p>", unsafe_allow_html=True)
+            st.write("**DESCRIÇÃO ESPECÍFICA DAS ATIVIDADES DO CARGO:**")
+            st.write(
+                f"<p style='text-align: justify;'>{vaga['Descrição específica das atividade do cargo'].capitalize()}</p>",
+                unsafe_allow_html=True
+            )
             st.write("---")
 
-# Adicionar CSS personalizado para estilizar os botões clicados e com hover
+# Adicionar CSS personalizado
 st.markdown(
     """
     <style>
     .stButton>button {
-        border: 2px solid blue; /* Adicionar borda azul */
+        border: 2px solid blue;
     }
     .stButton>button:focus, .stButton>button:hover {
-        background-color: #90EE90; /* Verde mais claro */
-        color: black; /* Garantir que a cor da fonte permaneça preta */
-        border: 2px solid blue; /* Manter a borda azul */
+        background-color: #90EE90;
+        color: black;
+        border: 2px solid blue;
     }
     </style>
     """,
