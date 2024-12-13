@@ -28,7 +28,10 @@ with col1:
         use_column_width=True
     )
 with col2:
-    st.empty()
+    st.image(
+        "images/codigo_agro.png",  # Substitua pelo caminho correto da imagem
+        use_column_width=True
+    )
 with col3:
     st.empty()
 
