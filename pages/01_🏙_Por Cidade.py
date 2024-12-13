@@ -7,25 +7,27 @@ def load_data(file_path):
     return pd.read_excel(file_path)
 
 # Função para extrair o nome das cidades da coluna 'Localidade'
-def extract_cities(localities):
+def extract_cities(localities_list):
     cities = []
-    for locality in localities:
-        # Extrair o nome da cidade após o travessão ('–') e antes do estado ('/XX')
-        if pd.notnull(locality):
-            try:
-                city = locality.split('–')[-1].split('/')[0].strip()
-                cities.append(city)
-            except IndexError:
-                continue
+    for localities in localities_list:
+        for locality in localities:
+            # Extrair o nome da cidade após o travessão ('–') e antes do estado ('/XX')
+            if pd.notnull(locality):
+                try:
+                    city = locality.split('–')[-1].split('/')[0].strip()
+                    cities.append(city)
+                except IndexError:
+                    continue
     return sorted(list(set(cities)))
 
 # Função para extrair opções únicas da coluna 'Graduação'
-def extract_graduation_options(graduations):
+def extract_graduation_options(graduations_list):
     options = []
-    for grad in graduations:
-        if pd.notnull(grad):
-            # Dividir por ponto e vírgula e adicionar cada item à lista
-            options.extend([item.strip() for item in grad.split(';')])
+    for graduations in graduations_list:
+        for grad in graduations:
+            if pd.notnull(grad):
+                # Dividir por ponto e vírgula e adicionar cada item à lista
+                options.extend([item.strip() for item in grad.split(';')])
     return sorted(list(set(options)))
 
 # Função para extrair opções únicas da coluna 'Mestrado'
@@ -70,16 +72,16 @@ def main():
             st.error("Os arquivos não contêm a coluna 'Localidade'.")
             return
 
-        # Extrair cidades únicas
-        cities = extract_cities(df_pesquisador['Localidade'])
+        # Extrair cidades únicas combinando os dois arquivos
+        cities = extract_cities([df_pesquisador['Localidade'], df_analista['Localidade']])
 
         # Verificar se a coluna 'Graduação' existe
         if 'Graduação' not in df_pesquisador.columns or 'Graduação' not in df_analista.columns:
             st.error("Os arquivos não contêm a coluna 'Graduação'.")
             return
 
-        # Extrair opções únicas de graduação
-        graduation_options = extract_graduation_options(df_pesquisador['Graduação'])
+        # Extrair opções únicas de graduação combinando os dois arquivos
+        graduation_options = extract_graduation_options([df_pesquisador['Graduação'], df_analista['Graduação']])
 
         # Verificar se a coluna 'Mestrado' existe
         if 'Mestrado' not in df_pesquisador.columns:
