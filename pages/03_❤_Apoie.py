@@ -79,7 +79,7 @@ st.markdown(
 )
 
 # Trecho copiável para o Pix "daniloaa"
-pix_info = "danilo_as@live.com"
+pix_info = "questoesagro@gmail.com"
 st.code(pix_info, language="text")
 
 # Adicionar Font Awesome para os ícones
