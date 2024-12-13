@@ -11,13 +11,16 @@ def extract_cities(localities_list):
     cities = []
     for localities in localities_list:
         for locality in localities:
-            # Extrair o nome da cidade após o travessão ('–') e antes do estado ('/XX')
             if pd.notnull(locality):
-                try:
-                    city = locality.split('–')[-1].split('/')[0].strip()
-                    cities.append(city)
-                except IndexError:
-                    continue
+                # Dividir a célula por ponto e vírgula para capturar múltiplas localidades
+                sub_localities = locality.split(';')
+                for sub_locality in sub_localities:
+                    try:
+                        # Extrair o nome da cidade após o travessão ('–') e antes do estado ('/XX')
+                        city = sub_locality.split('–')[-1].split('/')[0].strip()
+                        cities.append(city)
+                    except IndexError:
+                        continue
     return sorted(list(set(cities)))
 
 # Função para extrair opções únicas da coluna 'Graduação'
