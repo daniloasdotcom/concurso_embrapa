@@ -28,10 +28,7 @@ with col1:
         use_column_width=True
     )
 with col2:
-    st.image(
-        "images/codigo_agro.png",  # Substitua pelo caminho correto da imagem
-        use_column_width=True
-    )
+    st.empty()
 with col3:
     st.empty()
 
@@ -46,7 +43,35 @@ st.markdown(
 # Ícones com links sutis
 st.markdown(
     """
-    <a href="https://www.instagram.com/questoesagro/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a><br>
+    <a href="https://www.instagram.com/questoesagro/" target="_blank"><i class="fab fa-instagram"></i> Questões Agro</a><br>
+    """,
+    unsafe_allow_html=True
+)
+
+# Adicionar imagem no corpo principal entre colunas
+col1, col2, col3 = st.columns([1, 1, 1])
+with col1:
+    st.image(
+        "images/codigo_agro.png",  # Substitua pelo caminho correto da imagem
+        use_column_width=True
+    )
+with col2:
+    st.empty()
+with col3:
+    st.empty()
+
+
+# Lista de informações
+st.markdown(
+    """
+    Vem conosco!!
+    """
+)
+
+# Ícones com links sutis
+st.markdown(
+    """
+    <a href="https://www.instagram.com/codigo.agro/" target="_blank"><i class="fab fa-instagram"></i> Código Agro🌱 </a><br>
     """,
     unsafe_allow_html=True
 )
