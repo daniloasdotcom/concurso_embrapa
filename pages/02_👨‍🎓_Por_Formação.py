@@ -17,7 +17,7 @@ def extract_courses(df, column):
 
 # Função para filtrar áreas e subáreas por curso
 def filter_areas_subareas(df, course_column, area_column, subarea_column, selected_course):
-    filtered_df = df[df[course_column].str.contains(selected_course, na=False, case=False)]
+    filtered_df = df[df[course_column].str.strip().str.lower() == selected_course.strip().lower()]
     areas_subareas = filtered_df[["Opção nº", area_column, subarea_column]].drop_duplicates()
     return areas_subareas
 
@@ -176,6 +176,7 @@ st.sidebar.image(
 
 # Interface do Streamlit
 st.title("Consulta de Áreas e Subáreas por Curso de Graduação")
+st.markdown("**ATENÇÃO:** Há também as opções **Qualquer área de formação** e também **Qualquer área de formação de nível superior**")
 
 # Carregar dados
 analista_data = load_data(analista_file_path)
