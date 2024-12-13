@@ -79,8 +79,6 @@ localidades_coordenadas = {
 }
 
 
-
-
 # Aplicação Streamlit
 def main():
     st.title("Vagas para Pesquisador 👩‍🔬")
