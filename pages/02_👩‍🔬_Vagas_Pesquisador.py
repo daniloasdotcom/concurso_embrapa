@@ -75,9 +75,10 @@ localidades_coordenadas = {
     "EMBRAPA AGROENERGIA – Brasília/DF": (-15.7942, -47.8825),
     "EMBRAPA AGRICULTURA DIGITAL – Campinas/SP": (-22.9099, -47.0626),
     "EMBRAPA AGROINDÚSTRIA DE ALIMENTOS – Rio de Janeiro/RJ": (-22.9068, -43.1729),
-    "EMBRAPA SEDE – Brasília/DF": (-15.7942, -47.8825)
+    "EMBRAPA SEDE – Brasília/DF": (-15.7942, -47.8825),
+    "EMBRAPA SOLOS – Balsas/MA": (-7.5333, -46.0417),
+    "EMBRAPA SOLOS – Recife/PE": (-8.0476, -34.8770)
 }
-
 
 # Aplicação Streamlit
 def main():
