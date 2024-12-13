@@ -49,6 +49,18 @@ def generate_pdf(data, filename, start_index, selected_course):
     pdf.cell(200, 10, txt="Relatório de Vagas para Analista", ln=True, align="C")
     pdf.ln(10)
 
+    # Aviso
+    pdf.set_font("Arial", style="B", size=12)
+    pdf.cell(200, 10, txt="Aviso:", ln=True)
+    pdf.set_font("Arial", size=12)
+    aviso_text = (
+        "Este relatório de vagas foi elaborado com o objetivo de facilitar o processo "
+        "de busca de vagas no edital. Recomenda-se, com base nas informações apresentadas, "
+        "que os dados sejam verificados cuidadosamente, especialmente no momento da inscrição."
+    )
+    pdf.cell_with_wrapping(190, 10, aviso_text)
+    pdf.ln(10)
+
     # Curso selecionado
     pdf.set_font("Arial", style="B", size=12)
     pdf.cell(40, 10, txt="Curso de Graduação:", ln=True)
@@ -77,13 +89,11 @@ def generate_pdf(data, filename, start_index, selected_course):
 
         # Adicionar separador (linha horizontal)
         pdf.set_line_width(0.5)
-        pdf.line(10, pdf.get_y(), 200, pdf.get_y())  # Desenha uma linha horizontal
-        pdf.ln(2)  # Espaço após a linha
+        pdf.line(10, pdf.get_y(), 200, pdf.get_y())
+        pdf.ln(2)
 
     pdf.output(filename, dest="F")
 
-
-# Função para gerar relatório em PDF para Pesquisador com separador
 def generate_pesquisador_pdf(data, filename, start_index, selected_course):
     pdf = PDF()
     pdf.set_auto_page_break(auto=True, margin=15)
@@ -93,6 +103,18 @@ def generate_pesquisador_pdf(data, filename, start_index, selected_course):
     # Título do relatório
     pdf.set_font("Arial", style="B", size=14)
     pdf.cell(200, 10, txt="Relatório de Vagas para Pesquisador", ln=True, align="C")
+    pdf.ln(10)
+
+    # Aviso
+    pdf.set_font("Arial", style="B", size=12)
+    pdf.cell(200, 10, txt="Aviso:", ln=True)
+    pdf.set_font("Arial", size=12)
+    aviso_text = (
+        "Este relatório de vagas foi elaborado com o objetivo de facilitar o processo "
+        "de busca de vagas no edital. Recomenda-se, com base nas informações apresentadas, "
+        "que os dados sejam verificados cuidadosamente, especialmente no momento da inscrição."
+    )
+    pdf.cell_with_wrapping(190, 10, aviso_text)
     pdf.ln(10)
 
     # Curso selecionado
@@ -121,14 +143,13 @@ def generate_pesquisador_pdf(data, filename, start_index, selected_course):
         pdf.set_font("Arial", size=12)
         pdf.cell_with_wrapping(160, 10, f"{row[3]}")
 
-        # Adicionar informações de mestrados aceitos
         mestrados = data[
             (data["Área"] == row[2]) & (data["Subárea"] == row[3])
         ]["Mestrado"].dropna().unique()
 
         if mestrados.size > 0:
             pdf.set_font("Arial", style="B", size=12)
-            pdf.cell(30, 10, txt="Mestrados:", ln=True)
+            pdf.cell(30, 10, txt="Mestrados:", ln=False)
             pdf.set_font("Arial", size=12)
             mestrados_list = "; ".join(mestrados)
             pdf.cell_with_wrapping(160, 10, mestrados_list)
@@ -137,8 +158,8 @@ def generate_pesquisador_pdf(data, filename, start_index, selected_course):
 
         # Adicionar separador (linha horizontal)
         pdf.set_line_width(0.5)
-        pdf.line(10, pdf.get_y(), 200, pdf.get_y())  # Desenha uma linha horizontal
-        pdf.ln(2)  # Espaço após a linha
+        pdf.line(10, pdf.get_y(), 200, pdf.get_y())
+        pdf.ln(2)
 
     pdf.output(filename, dest="F")
 
@@ -146,6 +167,12 @@ def generate_pesquisador_pdf(data, filename, start_index, selected_course):
 # Caminho dos arquivos Excel
 analista_file_path = "Analista.xlsx"
 pesquisador_file_path = "pesquisador.xlsx"
+
+# Adicionar logo na barra lateral
+st.sidebar.image(
+    "images/logo_embrapa.jpg",  # Substitua pelo caminho correto da imagem
+    use_column_width=True
+)
 
 # Interface do Streamlit
 st.title("Consulta de Áreas e Subáreas por Curso de Graduação")
