@@ -17,7 +17,7 @@ def extract_courses(df, column):
 
 # Função para filtrar áreas e subáreas por curso
 def filter_areas_subareas(df, course_column, area_column, subarea_column, selected_course):
-    filtered_df = df[df[course_column].str.strip().str.lower() == selected_course.strip().lower()]
+    filtered_df = df[df[course_column].str.contains(selected_course, na=False, case=False)]
     areas_subareas = filtered_df[["Opção nº", area_column, subarea_column]].drop_duplicates()
     return areas_subareas
 
