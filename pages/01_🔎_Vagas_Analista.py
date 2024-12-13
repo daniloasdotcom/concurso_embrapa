@@ -157,6 +157,9 @@ def main():
 
 
         folium_static(m)
+        st.write(
+            "**A localização no mapa não indica o local exato de trabalho, apenas a cidade indicada no edital.**"
+        )
 
         st.write("---")
         st.write("**VAGAS:**")
