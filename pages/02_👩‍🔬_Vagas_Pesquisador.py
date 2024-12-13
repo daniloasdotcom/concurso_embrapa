@@ -39,6 +39,7 @@ localidades_coordenadas = {
     "EMBRAPA AMAPÁ – Macapá/AP": (0.0347, -51.0662),
     "EMBRAPA MEIO AMBIENTE – Jaguariúna/SP": (-22.7042, -47.0042),
     "EMBRAPA TABULEIROS COSTEIROS – Aracaju/SE": (-10.9472, -37.0731),
+    "EMBRAPA TABULEIROS COSTEIROS – Rio Largo/AL": (-9.4841, -35.8443),
     "EMBRAPA RONDÔNIA – Ouro Preto do Oeste/RO": (-10.7250, -62.2500),
     "EMBRAPA ALIMENTOS E TERRITÓRIOS – Maceió/AL": (-9.6662, -35.7356),
     "EMBRAPA MILHO E SORGO – Sete Lagoas/MG": (-19.4611, -44.2489),
@@ -79,6 +80,7 @@ localidades_coordenadas = {
     "EMBRAPA SOLOS – Balsas/MA": (-7.5333, -46.0417),
     "EMBRAPA SOLOS – Recife/PE": (-8.0476, -34.8770)
 }
+
 
 # Aplicação Streamlit
 def main():
