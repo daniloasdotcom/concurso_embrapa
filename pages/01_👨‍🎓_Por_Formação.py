@@ -145,7 +145,7 @@ def generate_pesquisador_pdf(data, filename, start_index, selected_course):
 
 # Caminho dos arquivos Excel
 analista_file_path = "Analista.xlsx"
-pesquisador_file_path = "Pesquisador.xlsx"
+pesquisador_file_path = "pesquisador.xlsx"
 
 # Interface do Streamlit
 st.title("Consulta de Áreas e Subáreas por Curso de Graduação")
