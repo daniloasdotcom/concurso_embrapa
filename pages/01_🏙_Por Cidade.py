@@ -42,6 +42,15 @@ def extract_masters_options(masters):
             options.extend([item.strip() for item in master.split(';')])
     return sorted(list(set(options)))
 
+# Função para extrair opções únicas da coluna 'Nível Médio Técnico'
+def extract_technical_levels(technical_levels):
+    options = []
+    for level in technical_levels:
+        if pd.notnull(level):
+            # Dividir por ponto e vírgula e adicionar cada item à lista
+            options.extend([item.strip() for item in level.split(';')])
+    return sorted(list(set(options)))
+
 # Função para gerar arquivo Excel em memória
 def to_excel(df):
     output = BytesIO()
@@ -52,16 +61,18 @@ def to_excel(df):
 
 # Função principal da aplicação
 def main():
-    st.title("Filtro de Localidades, Graduação e Mestrado")
+    st.title("Filtro de Localidades, Graduação, Mestrado e Nível Técnico")
 
     # Nome fixo dos arquivos Excel
     file_path_pesquisador = "pesquisador.xlsx"
     file_path_analista = "Analista.xlsx"
+    file_path_tecnico = "tecnico.xlsx"
 
     try:
         # Carregar os dados do Excel
         df_pesquisador = load_data(file_path_pesquisador)
         df_analista = load_data(file_path_analista)
+        df_tecnico = load_data(file_path_tecnico)
 
         # Remover vírgulas da coluna 'Opção nº' se ela existir
         if 'Opção nº' in df_pesquisador.columns:
@@ -70,13 +81,20 @@ def main():
         if 'Opção nº' in df_analista.columns:
             df_analista['Opção nº'] = df_analista['Opção nº'].astype(str).str.replace(",", "")
 
+        if 'Opção nº' in df_tecnico.columns:
+            df_tecnico['Opção nº'] = df_tecnico['Opção nº'].astype(str).str.replace(",", "")
+
         # Verificar se a coluna 'Localidade' existe
-        if 'Localidade' not in df_pesquisador.columns or 'Localidade' not in df_analista.columns:
+        if 'Localidade' not in df_pesquisador.columns or 'Localidade' not in df_analista.columns or 'Localidade' not in df_tecnico.columns:
             st.error("Os arquivos não contêm a coluna 'Localidade'.")
             return
 
-        # Extrair cidades únicas combinando os dois arquivos
-        cities = extract_cities([df_pesquisador['Localidade'], df_analista['Localidade']])
+        # Extrair cidades únicas combinando os três arquivos
+        cities = extract_cities([
+            df_pesquisador['Localidade'],
+            df_analista['Localidade'],
+            df_tecnico['Localidade']
+        ])
 
         # Verificar se a coluna 'Graduação' existe
         if 'Graduação' not in df_pesquisador.columns or 'Graduação' not in df_analista.columns:
@@ -94,12 +112,21 @@ def main():
         # Extrair opções únicas de mestrado
         masters_options = extract_masters_options(df_pesquisador['Mestrado'])
 
+        # Verificar se a coluna 'Nível Médio Técnico' existe
+        if 'Nível Médio Técnico' not in df_tecnico.columns:
+            st.error("O arquivo de Técnico não contém a coluna 'Nível Médio Técnico'.")
+            return
+
+        # Extrair formações únicas de "Nível Médio Técnico"
+        technical_levels = extract_technical_levels(df_tecnico['Nível Médio Técnico'])
+
         # Estado inicial das seleções
         reset_filters = st.button("Limpar Filtros")
         if reset_filters:
             st.session_state["selected_city"] = ""
             st.session_state["selected_graduation"] = ""
             st.session_state["selected_masters"] = ""
+            st.session_state["selected_technical"] = ""
 
         if "selected_city" not in st.session_state:
             st.session_state["selected_city"] = ""
@@ -110,6 +137,9 @@ def main():
         if "selected_masters" not in st.session_state:
             st.session_state["selected_masters"] = ""
 
+        if "selected_technical" not in st.session_state:
+            st.session_state["selected_technical"] = ""
+
         # Adicionar lista suspensa para seleção de cidade
         selected_city = st.selectbox("Selecione uma cidade", [""] + cities, index=0, key="selected_city")
 
@@ -119,13 +149,18 @@ def main():
         # Adicionar terceira lista suspensa para seleção de mestrado
         selected_masters = st.selectbox("Selecione um mestrado", [""] + masters_options, index=0, key="selected_masters")
 
+        # Adicionar quarta lista suspensa para seleção de nível técnico
+        selected_technical = st.selectbox("Selecione uma formação de Nível Médio Técnico", [""] + technical_levels, index=0, key="selected_technical")
+
         # Filtrar os dados pela cidade selecionada
         filtered_pesquisador = df_pesquisador
         filtered_analista = df_analista
+        filtered_tecnico = df_tecnico
 
         if selected_city:
             filtered_pesquisador = filtered_pesquisador[filtered_pesquisador['Localidade'].str.contains(selected_city, na=False)]
             filtered_analista = filtered_analista[filtered_analista['Localidade'].str.contains(selected_city, na=False)]
+            filtered_tecnico = filtered_tecnico[filtered_tecnico['Localidade'].str.contains(selected_city, na=False)]
 
         # Filtrar os dados pela graduação selecionada
         if selected_graduation:
@@ -136,12 +171,18 @@ def main():
         if selected_masters:
             filtered_pesquisador = filtered_pesquisador[filtered_pesquisador['Mestrado'].str.contains(selected_masters, na=False)]
 
+        # Filtrar os dados pela formação técnica selecionada
+        if selected_technical:
+            filtered_tecnico = filtered_tecnico[filtered_tecnico['Nível Médio Técnico'].str.contains(selected_technical, na=False)]
+
+        # Exibição dos resultados e download
         # Selecionar as colunas desejadas
         columns_to_display = ['Opção nº', 'Cargo', 'Área', 'Subárea', 'Total de Vagas', 'Mestrado', 'Graduação']
 
         # Verificar se as colunas existem no DataFrame
         existing_columns_pesquisador = [col for col in columns_to_display if col in df_pesquisador.columns]
         existing_columns_analista = [col for col in columns_to_display if col in df_analista.columns]
+        existing_columns_tecnico = [col for col in columns_to_display if col in df_tecnico.columns]
 
         if existing_columns_pesquisador:
             st.subheader("Resultados para vagas de pesquisador")
@@ -176,6 +217,23 @@ def main():
 
         else:
             st.error("As colunas selecionadas não foram encontradas no arquivo de Analista.")
+
+        if existing_columns_tecnico:
+            st.subheader("Resultados para vagas de técnico")
+
+            # Botão para baixar os resultados como Excel
+            excel_tecnico = to_excel(filtered_tecnico[existing_columns_tecnico])
+            st.download_button(
+                label="Baixar resultados de técnico em Excel",
+                data=excel_tecnico,
+                file_name="resultados_tecnico.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
+
+            st.write(filtered_tecnico[existing_columns_tecnico])
+
+        else:
+            st.error("As colunas selecionadas não foram encontradas no arquivo de Técnico.")
 
     except FileNotFoundError as e:
         st.error(f"O arquivo não foi encontrado: {e.filename}. Certifique-se de que ele está no diretório correto.")

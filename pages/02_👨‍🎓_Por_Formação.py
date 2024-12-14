@@ -165,6 +165,7 @@ def generate_pesquisador_pdf(data, filename, start_index, selected_course):
 
 
 # Caminho dos arquivos Excel
+tecnico_file_path = "tecnico.xlsx"
 analista_file_path = "Analista.xlsx"
 pesquisador_file_path = "pesquisador.xlsx"
 
@@ -179,10 +180,12 @@ st.title("Consulta de Áreas e Subáreas por Curso de Graduação")
 st.markdown("**ATENÇÃO:** Há também as opções **Qualquer área de formação** e também **Qualquer área de formação de nível superior**")
 
 # Carregar dados
+tecnico_data = load_data(tecnico_file_path)
 analista_data = load_data(analista_file_path)
 pesquisador_data = load_data(pesquisador_file_path)
 
 # Processar lista de cursos para ambas as planilhas
+tecnico_courses = extract_courses(tecnico_data, "Nível Médio Técnico")
 analista_courses = extract_courses(analista_data, "Graduação")
 pesquisador_courses = extract_courses(pesquisador_data, "Graduação")
 all_courses = sorted(set(analista_courses + pesquisador_courses))
@@ -251,3 +254,38 @@ if selected_course:
         else:
             st.write("Nenhuma área, subárea ou mestrado encontrado para o curso selecionado na vaga de Pesquisador.")
 
+# Lista suspensa para seleção de curso técnico
+selected_tecnico_course = st.selectbox("Selecione uma formação de Nível Médio Técnico:", tecnico_courses)
+
+if selected_tecnico_course:
+    # Filtrar áreas e subáreas para Técnico
+    tecnico_areas_subareas = filter_areas_subareas(
+        tecnico_data,
+        "Nível Médio Técnico",
+        "Área",
+        "Subárea",
+        selected_tecnico_course
+    )
+
+    # Expander para resultados de Técnico
+    with st.expander("Resultados para as vagas de Técnico 🛠️"):
+        # Botão para gerar o relatório em PDF
+        if st.button("Gerar Relatório em PDF para Técnico"):
+            generate_pdf(tecnico_areas_subareas, "Relatorio_Tecnico.pdf", start_index=1, selected_course=selected_tecnico_course)
+            st.success("Relatório gerado com sucesso! Faça o download abaixo.")
+            with open("Relatorio_Tecnico.pdf", "rb") as pdf_file:
+                st.download_button(
+                    label="Baixar Relatório PDF",
+                    data=pdf_file,
+                    file_name="Relatorio_Tecnico.pdf",
+                    mime="application/pdf",
+                )
+
+        if not tecnico_areas_subareas.empty:
+            st.write(
+                f"Seu curso técnico permite que você pleiteie cargos de **TÉCNICO** nas seguintes áreas e subáreas:")
+            for idx, row in enumerate(tecnico_areas_subareas.itertuples(), start=1):
+                st.write(f"{idx}. **Opção nº**: {row[1]}, **Área**: {row[2]}, **Subárea**: {row[3]}")
+                st.write("---")
+        else:
+            st.write("Nenhuma área ou subárea encontrada para a formação técnica selecionada.")
