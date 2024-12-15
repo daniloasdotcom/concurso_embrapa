@@ -452,9 +452,133 @@ conhecimentos_complementares = {
         11. Noções de estatística:  
             11.1 Modelos univariados e multivariados.  
         12. Tratamento e análise de sinais espectroscópicos e processamento de imagens.  
-        """
-
-
+        """,
+        "Fotônica": """
+        1. Aplicações tecnológicas da Fotônica.  
+        2. Conceitos básicos da interação da radiação eletromagnética com a matéria e processos de interação da luz com sistemas biológicos.  
+        3. Conceitos básicos de óptica, espectroscopia, eletrônica, mecânica quântica e termodinâmica.  
+        4. Cristais fotônicos e fibras de cristais fotônicos.  
+        5. Demonstrações em Fotônica.  
+        6. Fibras ópticas.  
+           6.1 Propagação.  
+           6.2 Atenuação.  
+           6.3 Dispersão.  
+           6.4 Dispositivos de/para fibras ópticas.  
+        7. Fotometria absoluta.  
+        8. Fotometria de campos ricos com sobreposição de fontes pontuais (PSF).  
+        9. Fotometria diferencial e séries temporais.  
+        10. História da Fotônica e das comunicações ópticas.  
+        11. Micro-cavidades ópticas.  
+        12. Modelo clássico da interação da luz com a matéria.  
+        13. Noções de estatística:  
+            13.1 Modelos univariados e multivariados.  
+        14. Óptica não linear.  
+        15. Sistemas fotométricos e imageamento de grande campo.  
+        """,
+        "Nanotecnologia": """
+            1. Definição de materiais compósitos, compósitos de matriz: polimérica, metálica e cerâmica.  
+            2. Compósitos de fibra de carbono, micro e macromecânica dos compósitos, resistência mecânica, fratura e fadiga de compósitos.  
+            3. Introdução a polímeros: conceituação e classificação, reações de polimerização, técnicas de polimerização.  
+            4. Síntese e caracterização de polímeros:  
+               4.1 Polimerização em massa.  
+               4.2 Polimerização em solução.  
+               4.3 Polimerização em suspensão.  
+               4.4 Polimerização em emulsão.  
+            5. Recuperação e purificação de polímeros sintetizados, caracterização de polímeros quanto à estrutura e peso molecular.  
+            6. Introdução a Nanotecnologia:  
+               6.1 Histórico.  
+               6.2 Conceitos.  
+               6.3 Desafios.  
+               6.4 Fundamentos da Nanotecnologia.  
+               6.5 Morfologia de materiais nanoestruturados.  
+            7. Nanopartículas (técnicas bottom-up) e Nanopós (técnicas de top-down).  
+            8. Nanotubos, “nanorods”, nanofios e nanofibras, fulerenos e nanotubos de carbono.  
+            9. Blocos de construção: nanotubos e nanopartículas.  
+            10. Técnicas e ferramentas de manipulação molecular e atômica:  
+                10.1 Nanofabricação “Positional Assembly”.  
+                10.2 “Self-Replication”.  
+            11. Nanociência e nanotecnologia com ênfase em Binanotecnologia.  
+            """,
+        "Produção Aquícola": """
+       1. Aspectos fisiológicos, bioquímicos e imunológicos relacionados aos peixes e crustáceos.  
+       2. Dinâmica de populações e avaliação dos estoques pesqueiros.  
+       3. Espécies e produção de plânctons importantes para a aquicultura.  
+       4. Gestão participativa e etnoconhecimento.  
+       5. Importância nutricional do alimento vivo para alimentação de larvas e alevinos de peixes.  
+       6. Manejo alimentar e nutricional de peixes e crustáceos em sistemas de produção aquícola convencionais e sustentáveis.  
+       7. Manejo e correção da água e do solo (quando aplicável) nos diferentes sistemas de produção.  
+       8. Recursos pesqueiros: manejo e conservação, uso sustentável.  
+       9. Reprodução, larvicultura e engorda com potencial para consumo de peixes e crustáceos em sistema intensivo de produção.  
+       """,
+        "Recursos Naturais": """
+       1. Agricultura, Sociedade e Natureza.  
+       2. Análise de dados ambientais.  
+       3. Análise de processos erosivos.  
+       4. Análise e manejo de ecossistemas.  
+       5. Conservação da biodiversidade.  
+       6. Ecologia comportamental aplicada à conservação.  
+       7. Economia ambiental.  
+       8. Educação ambiental.  
+       9. Estatística aplicada às ciências ambientais.  
+       10. Geoprocessamento.  
+       11. Geotecnologias aplicadas à conservação da biodiversidade.  
+       12. Métodos de análise ambiental.  
+       13. Microbiologia ambiental.  
+       14. Monitoramento e conservação de recursos hídricos.  
+       15. Mutagênese ambiental.  
+       16. Sensoriamento remoto aplicado à Ciência Ambiental.  
+       17. Sistemas agroflorestais.  
+       18. Solos e meio ambiente.  
+       """,
+        "Gestão da Informação": """
+       1. Estatística.  
+          1.1 Conceitos de probabilidade.  
+          1.2 Modelo de probabilidade.  
+          1.3 Probabilidade condicional.  
+          1.4 Independência.  
+          1.5 Variáveis aleatórias.  
+          1.6 Esperança, variância e covariância.  
+          1.7 Distribuições contínuas e discretas.  
+          1.8 Distribuições multidimensionais: matriz de covariância.  
+       2. Gestão e governança de tecnologia da informação.  
+          2.1 Gerenciamento de projetos – PMBOK 7ª edição.  
+          2.2 Projetos e a organização.  
+          2.3 Escritório de projetos.  
+          2.4 Processos, grupos de processos e área de conhecimento.  
+          2.5 Gestão de riscos.  
+          2.6 Gerenciamento de serviços (ITIL v4): conceitos básicos, disciplinas, estrutura e objetivos.  
+          2.7 Governança de TI (COBIT 2019): conceitos básicos, estrutura e objetivos.  
+          2.8 Conceitos de gestão de processos e modelagem de processos de negócio usando BPMN.  
+          2.9 Metodologia Ágil.  
+       3. Inteligência artificial.  
+          3.1 Análise de dados (Pandas, NumPy, Jupyter, R).  
+          3.2 Aprendizado de máquina.  
+              3.2.1 Técnicas de classificação.  
+              3.2.2 Técnicas de regressão.  
+              3.2.3 Técnicas de agrupamento.  
+              3.2.4 Técnicas de redução de dimensionalidade.  
+              3.2.5 Técnicas de associação.  
+              3.2.6 Sistemas de recomendação.  
+       4. Inteligência de negócios (Business Intelligence).  
+          4.1 Conceitos, fundamentos, características, técnicas e métodos de Business Intelligence (BI).  
+          4.2 Sistemas de suporte a decisão e gestão de conteúdo.  
+          4.3 Arquitetura.  
+          4.4 Visualização de dados: BD individuais e cubos.  
+          4.5 Mapeamento das fontes de dados: técnicas para coleta de dados.  
+          4.6 Arquitetura de Business Intelligence.  
+       5. Noções de visão computacional com CNN.  
+       6. Classificação de imagens e detecção de objetos.  
+       7. Noções de processamento de linguagem natural.  
+       8. Matemática computacional e ciência da computação aplicada.  
+          8.1 Lógica Formal.  
+          8.2 Demonstrações, Recursão e Análise de Algoritmo.  
+          8.3 Conjuntos e combinatória.  
+          8.4 Relações, Funções e Matrizes.  
+          8.5 Grafos e Árvores.  
+          8.6 Grafos e Algoritmos.  
+          8.7 Álgebra Booleana e Lógica de Computadores.  
+          8.8 Modelagem Aritmética, Computação e Linguagens.  
+       """
         # Adicione mais áreas conforme necessário
     }
 
