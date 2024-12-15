@@ -628,7 +628,7 @@ def main():
             )
             st.write("---")
     st.header("Assuntos cobrados")
-
+    st.header("Conhecimentos Gerais")
     st.subheader("Língua Portuguesa")
     st.markdown("""
     1. Compreensão e interpretação de textos de gêneros variados.  
