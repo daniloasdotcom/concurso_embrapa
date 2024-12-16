@@ -64,7 +64,7 @@ st.markdown(
 
 # Título "Filtro de Vagas" centralizado
 st.markdown("<h1 class='centered-text'>🔎 Filtro de Vagas</h1>", unsafe_allow_html=True)
-st.markdown("<h2 class='centered-text'>🔎 Atualizado em 16/02 - 13:35</h1>", unsafe_allow_html=True)
+st.markdown("<h3 class='centered-text'>🔄 Atualizado em 16/02 - 13:35</h1>", unsafe_allow_html=True)
 
 # Criar duas colunas para centralizar a imagem
 col1, col2, col3 = st.columns([1, 2, 1])
