@@ -78,7 +78,13 @@ localidades_coordenadas = {
     "EMBRAPA AGROINDÚSTRIA DE ALIMENTOS – Rio de Janeiro/RJ": (-22.9068, -43.1729),
     "EMBRAPA SEDE – Brasília/DF": (-15.7942, -47.8825),
     "EMBRAPA SOLOS – Balsas/MA": (-7.5333, -46.0417),
-    "EMBRAPA SOLOS – Recife/PE": (-8.0476, -34.8770)
+    "EMBRAPA SOLOS – Recife/PE": (-8.0476, -34.8770),
+    "EMBRAPA ARROZ E FEIJÃO – Alegrete/RS": (-29.7883, -55.7949),  # Coordenadas aproximadas
+    "EMBRAPA GADO DE LEITE – Coronel Pacheco/MG": (-21.5597, -43.2583),  # Coordenadas aproximadas
+    "EMBRAPA CLIMA TEMPERADO – Francisco Beltrão/RS": (-26.0792, -53.0577),  # Coordenadas aproximadas
+    "EMBRAPA AMAZÔNIA OCIDENTAL – Itacoatiara/AM": (-3.1386, -58.4442),  # Coordenadas aproximadas
+    "EMBRAPA SEMIÁRIDO – Nossa Senhora da Glória/SE": (-10.2158, -37.4217),  # Coordenadas aproximadas
+    "EMBRAPA TRIGO – Uberaba/MG": (-19.7472, -47.9312)
 }
 
 

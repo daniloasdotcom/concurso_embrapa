@@ -87,6 +87,15 @@ localidades_coordenadas = {
     "EMBRAPA TRIGO – Passo Fundo/RS": (-28.2622, -52.4083),
     "EMBRAPA UVA E VINHO – Bento Gonçalves/RS": (-29.1699, -51.5185),
     "EMBRAPA SEDE – Brasília/DF": (-15.7942, -47.8825),
+    "EMBRAPA ARROZ E FEIJÃO – Alegrete/RS": (-29.7883, -55.7949),  # Coordenadas aproximadas
+    "EMBRAPA GADO DE LEITE – Coronel Pacheco/MG": (-21.5597, -43.2583),  # Coordenadas aproximadas
+    "EMBRAPA CLIMA TEMPERADO – Francisco Beltrão/RS": (-26.0792, -53.0577),  # Coordenadas aproximadas
+    "EMBRAPA AMAZÔNIA OCIDENTAL – Itacoatiara/AM": (-3.1386, -58.4442),  # Coordenadas aproximadas
+    "EMBRAPA AMAPÁ – Macapá/AP": (0.0342, -51.0694),  # Coordenadas aproximadas
+    "EMBRAPA SEMIÁRIDO – Nossa Senhora da Glória/SE": (-10.2158, -37.4217),  # Coordenadas aproximadas
+    "EMBRAPA SEMIÁRIDO – Petrolina/PE": (-9.3891, -40.5027),  # Coordenadas aproximadas
+    "EMBRAPA CAPRINOS E OVINOS – Sobral/CE": (-3.6942, -40.3496),  # Coordenadas aproximadas
+    "EMBRAPA TRIGO – Uberaba/MG": (-19.7472, -47.9312)
 }
 
 # Aplicação Streamlit

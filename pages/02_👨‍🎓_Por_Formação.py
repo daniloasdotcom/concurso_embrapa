@@ -176,6 +176,7 @@ st.sidebar.image(
     use_column_width=True
 )
 
+
 # Interface do Streamlit
 st.title("Consulta de Áreas e Subáreas por Cargo baseado na sua Formação")
 st.markdown("**ATENÇÃO:** Há também as opções **Qualquer área de formação** e também **Qualquer área de formação de nível superior**")
