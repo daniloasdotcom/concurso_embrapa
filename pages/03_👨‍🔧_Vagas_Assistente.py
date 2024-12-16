@@ -15,7 +15,7 @@ st.sidebar.image(
 
 # Carregar o dataset
 def load_data():
-    file_path = '../concurso_embrapa/tecnico.xlsx'  # Substitua pelo caminho correto
+    file_path = '../concurso_embrapa/assistente.xlsx'  # Substitua pelo caminho correto
     data = pd.read_excel(file_path)
     return data
 
@@ -92,7 +92,7 @@ localidades_coordenadas = {
 # Aplicação Streamlit
 def main():
     st.title("Vagas para Técnico 🔎")
-    st.subheader("Salário-base: R$ 5.556,81")
+    st.subheader("Salário-base: R$ 2.186,19")
 
     # Filtro de áreas
     area_options = data['Área'].dropna().unique()
@@ -185,8 +185,8 @@ def main():
         st.write("**REQUISITOS**")
         for _, vaga in filtered_data.iterrows():
 
-            st.write("**Nível Técnico:**")
-            for nivel_tecnico in vaga['Nível Médio Técnico'].split(';'):
+            st.write("**Assistente:**")
+            for nivel_tecnico in vaga['Requisitos'].split(';'):
                 st.write(f"- {nivel_tecnico.strip()}")
 
             st.write("---")
@@ -198,74 +198,10 @@ def main():
             st.write("---")
 
     st.header("Assuntos cobrados")
-    st.header("Conhecimentos Gerais")
-    st.subheader("Língua Portuguesa")
+    st.subheader("Em breve descreveremos aqui")
     st.markdown("""
-        1. Compreensão e interpretação de textos de gêneros variados.  
-        2. Reconhecimento de tipos e gêneros textuais.  
-        3. Domínio da ortografia oficial.  
-        4. Domínio dos mecanismos de coesão textual.  
-           - Emprego de elementos de referenciação, substituição e repetição, de conectores e de outros elementos de sequenciação textual.  
-           - Emprego de tempos e modos verbais.  
-        5. Domínio da estrutura morfossintática do período.  
-           - Emprego das classes de palavras.  
-           - Relações de coordenação entre orações e entre termos da oração.  
-           - Relações de subordinação entre orações e entre termos da oração.  
-           - Emprego dos sinais de pontuação.  
-           - Concordância verbal e nominal.  
-           - Regência verbal e nominal.  
-           - Emprego do sinal indicativo de crase.  
-           - Colocação dos pronomes átonos.  
-        6. Reescrita de frases e parágrafos do texto.  
-           - Significação das palavras.  
-           - Substituição de palavras ou de trechos de texto.  
-           - Reorganização da estrutura de orações e de períodos do texto.  
-           - Reescrita de textos de diferentes gêneros e níveis de formalidade.
+        1.Em breve descreveremos aqui
         """)
-    st.subheader("Matemática")
-    st.markdown("""
-        1. Conjuntos numéricos:  
-           - Números inteiros, racionais e reais.  
-        2. Sistema legal de medidas.  
-        3. Razões e proporções:  
-           - Divisão proporcional.  
-           - Regras de três simples e compostas.  
-           - Porcentagens.  
-        4. Equações e inequações:  
-           - De 1º grau.  
-           - De 2º grau.  
-        5. Sistemas lineares.  
-        6. Funções e gráficos.  
-        7. Matemática financeira:  
-           - Juros simples e compostos.  
-           - Taxas de juros: nominal, efetiva, equivalentes, proporcionais, real e aparente.  
-        8. Princípios de contagem.  
-        9. Progressões:  
-           - Aritméticas.  
-           - Geométricas.  
-        10. Geometria plana:  
-            - Polígonos, perímetros e áreas.  
-            - Semelhança de triângulos.  
-            - Trigonometria do triângulo retângulo.  
-        11. Geometria espacial:  
-            - Áreas e volumes de sólidos.  
-        12. Noções de Estatística:  
-            - Gráficos e tabelas.  
-            - Médias, moda, mediana e desvio-padrão.  
-        13. Noções de probabilidade.  
-    """)
-    st.subheader("Ética e Legislação")
-    st.markdown("""
-        1. Estatuto da Embrapa:  
-           - Disponível no endereço eletrônico: [Estatuto da Embrapa](https://www.embrapa.br/documents/10180/36830205/8%C2%AA+AGO+24abr2024+-+Estatuto/f6eadc9b-65aa-36c0-27ee-bfffdbb7358f).  
-        2. Lei nº 13.709/2018:  
-           - Lei Geral de Proteção de Dados Pessoais (LGPD).  
-    """)
-    st.subheader("Plano Diretor da Embrapa")
-    st.markdown("""
-        - Plano Diretor da Embrapa 2024-2030.
-        """)
-
 
 # Adicionar CSS personalizado
 st.markdown(

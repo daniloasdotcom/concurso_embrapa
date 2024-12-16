@@ -12,11 +12,9 @@ def extract_cities(localities_list):
     for localities in localities_list:
         for locality in localities:
             if pd.notnull(locality):
-                # Dividir a célula por ponto e vírgula para capturar múltiplas localidades
                 sub_localities = locality.split(';')
                 for sub_locality in sub_localities:
                     try:
-                        # Extrair o nome da cidade após o travessão ('–') e antes do estado ('/XX')
                         city = sub_locality.split('–')[-1].split('/')[0].strip()
                         cities.append(city)
                     except IndexError:
@@ -64,12 +62,14 @@ def main():
     st.title("Filtro de Localidades, Graduação, Mestrado e Nível Técnico")
 
     # Nome fixo dos arquivos Excel
+    file_path_assistente = "assistente.xlsx"
     file_path_pesquisador = "pesquisador.xlsx"
     file_path_analista = "Analista.xlsx"
     file_path_tecnico = "tecnico.xlsx"
 
     try:
         # Carregar os dados do Excel
+        df_assistente = load_data(file_path_assistente)
         df_pesquisador = load_data(file_path_pesquisador)
         df_analista = load_data(file_path_analista)
         df_tecnico = load_data(file_path_tecnico)
@@ -84,8 +84,11 @@ def main():
         if 'Opção nº' in df_tecnico.columns:
             df_tecnico['Opção nº'] = df_tecnico['Opção nº'].astype(str).str.replace(",", "")
 
+        if 'Opção nº' in df_assistente.columns:
+            df_assistente['Opção nº'] = df_assistente['Opção nº'].astype(str).str.replace(",", "")
+
         # Verificar se a coluna 'Localidade' existe
-        if 'Localidade' not in df_pesquisador.columns or 'Localidade' not in df_analista.columns or 'Localidade' not in df_tecnico.columns:
+        if 'Localidade' not in df_pesquisador.columns or 'Localidade' not in df_analista.columns or 'Localidade' not in df_tecnico.columns or 'Localidade' not in df_assistente.columns:
             st.error("Os arquivos não contêm a coluna 'Localidade'.")
             return
 
@@ -93,7 +96,8 @@ def main():
         cities = extract_cities([
             df_pesquisador['Localidade'],
             df_analista['Localidade'],
-            df_tecnico['Localidade']
+            df_tecnico['Localidade'],
+            df_assistente['Localidade']
         ])
 
         # Verificar se a coluna 'Graduação' existe
@@ -127,6 +131,7 @@ def main():
             st.session_state["selected_graduation"] = ""
             st.session_state["selected_masters"] = ""
             st.session_state["selected_technical"] = ""
+            st.session_state["selected_assistente"] = ""
 
         if "selected_city" not in st.session_state:
             st.session_state["selected_city"] = ""
@@ -139,6 +144,9 @@ def main():
 
         if "selected_technical" not in st.session_state:
             st.session_state["selected_technical"] = ""
+
+        if "selected_assistente" not in st.session_state:
+            st.session_state["selected_assistente"] = ""
 
         # Adicionar lista suspensa para seleção de cidade
         selected_city = st.selectbox("Selecione uma cidade", [""] + cities, index=0, key="selected_city")
@@ -156,11 +164,13 @@ def main():
         filtered_pesquisador = df_pesquisador
         filtered_analista = df_analista
         filtered_tecnico = df_tecnico
+        filtered_assistente = df_assistente
 
         if selected_city:
             filtered_pesquisador = filtered_pesquisador[filtered_pesquisador['Localidade'].str.contains(selected_city, na=False)]
             filtered_analista = filtered_analista[filtered_analista['Localidade'].str.contains(selected_city, na=False)]
             filtered_tecnico = filtered_tecnico[filtered_tecnico['Localidade'].str.contains(selected_city, na=False)]
+            filtered_assistente = filtered_assistente[filtered_assistente['Localidade'].str.contains(selected_city, na=False)]
 
         # Filtrar os dados pela graduação selecionada
         if selected_graduation:
@@ -176,13 +186,31 @@ def main():
             filtered_tecnico = filtered_tecnico[filtered_tecnico['Nível Médio Técnico'].str.contains(selected_technical, na=False)]
 
         # Exibição dos resultados e download
-        # Selecionar as colunas desejadas
-        columns_to_display = ['Opção nº', 'Cargo', 'Área', 'Subárea', 'Total de Vagas', 'Mestrado', 'Graduação']
+        # Selecionar as colunas desejadasa
+        columns_to_display = ['Opção nº', 'Cargo', 'Área', 'Subárea', 'Total de Vagas', 'Mestrado', 'Graduação', 'Requisitos', 'Nível Médio Técnico']
 
         # Verificar se as colunas existem no DataFrame
         existing_columns_pesquisador = [col for col in columns_to_display if col in df_pesquisador.columns]
         existing_columns_analista = [col for col in columns_to_display if col in df_analista.columns]
         existing_columns_tecnico = [col for col in columns_to_display if col in df_tecnico.columns]
+        existing_columns_assistente = [col for col in columns_to_display if col in df_assistente.columns]
+
+        if existing_columns_assistente:
+            st.subheader("Resultados para vagas de assistente")
+
+            # Botão para baixar os resultados como Excel
+            excel_assistente = to_excel(filtered_assistente[existing_columns_assistente])
+            st.download_button(
+                label="Baixar resultados de assistente em Excel",
+                data=excel_assistente,
+                file_name="resultados_assistente.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
+
+            st.write(filtered_assistente[existing_columns_assistente])
+
+        else:
+            st.error("As colunas selecionadas não foram encontradas no arquivo de assistente.")
 
         if existing_columns_pesquisador:
             st.subheader("Resultados para vagas de pesquisador")
@@ -234,6 +262,8 @@ def main():
 
         else:
             st.error("As colunas selecionadas não foram encontradas no arquivo de Técnico.")
+
+
 
     except FileNotFoundError as e:
         st.error(f"O arquivo não foi encontrado: {e.filename}. Certifique-se de que ele está no diretório correto.")
