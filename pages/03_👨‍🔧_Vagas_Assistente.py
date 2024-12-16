@@ -91,7 +91,7 @@ localidades_coordenadas = {
 
 # Aplicação Streamlit
 def main():
-    st.title("Vagas para Técnico 🔎")
+    st.title("Vagas para Assistente 🔎")
     st.subheader("Salário-base: R$ 2.186,19")
 
     # Filtro de áreas

@@ -12,3 +12,6 @@ Aplicação para busca dinâmica das vagas e informações das vagas do edital 0
 - Vagas para técnico
 - Vagas para analista
 - Vagas para pesquisador
+- Locais de prova
+- Mapas de posicionamento
+- Produção de relatórios em pdf e .xlsx
