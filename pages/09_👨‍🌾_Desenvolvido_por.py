@@ -43,7 +43,7 @@ st.markdown(
     <a href="https://www.instagram.com/daniloas" target="_blank"><i class="fab fa-instagram"></i> Instagram</a><br>
     <a href="https://daniloas.com" target="_blank"><i class="fas fa-globe"></i> Website</a><br>
     <a href="https://www.linkedin.com/in/daniloas/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a><br>
-    <a href="https://github.com/daniloas" target="_blank"><i class="fab fa-github"></i> GitHub</a><br>
+    <a href="https://github.com/daniloasdot.com" target="_blank"><i class="fab fa-github"></i> GitHub</a><br>
     <a href="mailto:danilo_as@live.com" target="_blank"><i class="fas fa-envelope"></i> danilo_as@live.com</a><br>
     """,
     unsafe_allow_html=True
