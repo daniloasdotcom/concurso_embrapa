@@ -1,6 +1,6 @@
 # Filtro de Vagas - Concurso Embrapa 2024
 
-![Streamlit](https://img.shields.io/badge/Streamlit-1.0-brightgreen) ![Python](https://img.shields.io/badge/Python-3.9-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.39-brightgreen) ![Python](https://img.shields.io/badge/Python-3.9-blue)
 
 Aplicação para busca dinâmica das vagas e informações das vagas do edital 01/2024 da Empresa Brasileira de Pesquisa Agropecuária (Embrapa).
 
